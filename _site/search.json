@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pin Wang",
+    "section": "",
+    "text": "Here is a paragraph about me!"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "My Projects",
@@ -33,12 +40,5 @@
     "title": "Resume",
     "section": "",
     "text": "Download PDF file."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Pin Wang",
-    "section": "",
-    "text": "Here is a paragraph about me!"
   }
 ]

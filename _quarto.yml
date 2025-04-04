@@ -1,8 +1,11 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Pin's Website"
+  site-url: "https://rsm-piw007.github.io/pw_personal_website"
+
   navbar:
     left:
       - href: index.qmd
