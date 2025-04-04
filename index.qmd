@@ -1,0 +1,13 @@
+---
+title: "Pin Wang"
+image: "images/aboutme.png"
+about:
+    template: jolla
+    links:
+        - icon: envelop
+          href: mailto:piw007@ucsd.edu
+        - icon: linkedin
+          href: www.linkedin.com/in/pin-wang-57b08b312
+---
+
+Here is a paragraph about me!
