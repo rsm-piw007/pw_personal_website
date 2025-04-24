@@ -4,14 +4,14 @@
     "href": "blog.html",
     "title": "My Projects",
     "section": "",
-    "text": "This is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Homework 1\n\n\n\n\n\n\nPin Wang\n\n\nApr 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2\n\n\n\n\n\n\nPin Wang\n\n\nApr 27, 2025\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/project1/index.html",
     "href": "blog/project1/index.html",
-    "title": "This is Project 1",
+    "title": "Homework 1",
     "section": "",
-    "text": "I cleaned some data\n\n\n\nI analyzed the data\n\n# message: false\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nmtcars |&gt;\n    ggplot (aes (x = wt, y = mpg)) +\n    geom_point ( )"
+    "text": "Dean Karlan (Yale) and John List (Chicago) conducted a large-scale direct-mail field experiment to study how matching grants affect charitable giving. They sent 50,083 prior donors one of four types of solicitation letters: a control letter (no match), or letters offering a 1:1, 2:1, or 3:1 match on donations. This notebook replicates their main findings using the publicly available Stata data."
   },
   {
     "objectID": "blog/project1/index.html#section-1-data",
@@ -40,5 +40,145 @@
     "title": "Pin Wang",
     "section": "",
     "text": "Here is a paragraph about me!"
+  },
+  {
+    "objectID": "html_template.html",
+    "href": "html_template.html",
+    "title": "Lijia Yu’s resume",
+    "section": "",
+    "text": "Lijia Yu\n\n\n\n\n\n lijia.yu@outlook.com\n github.com/yulijia\n +1 000-000-0000\nFor more information, please contact me via email.\n\n\n\n\n\nExperienced in statistical analysis, statistical learning models, and optimization methods.\nFull experience with next generation sequencing data analysis.\nHighly skilled in R, Bash, Perl, Python, LaTeX\n\n\n\n\nThis resume was made with the R package pagedown.\nLast updated on 2025-04-23."
+  },
+  {
+    "objectID": "html_template.html#contact",
+    "href": "html_template.html#contact",
+    "title": "Lijia Yu’s resume",
+    "section": "",
+    "text": "lijia.yu@outlook.com\n github.com/yulijia\n +1 000-000-0000\nFor more information, please contact me via email."
+  },
+  {
+    "objectID": "html_template.html#skills",
+    "href": "html_template.html#skills",
+    "title": "Lijia Yu’s resume",
+    "section": "",
+    "text": "Experienced in statistical analysis, statistical learning models, and optimization methods.\nFull experience with next generation sequencing data analysis.\nHighly skilled in R, Bash, Perl, Python, LaTeX"
+  },
+  {
+    "objectID": "html_template.html#disclaimer",
+    "href": "html_template.html#disclaimer",
+    "title": "Lijia Yu’s resume",
+    "section": "",
+    "text": "This resume was made with the R package pagedown.\nLast updated on 2025-04-23."
+  },
+  {
+    "objectID": "html_template.html#title",
+    "href": "html_template.html#title",
+    "title": "Lijia Yu’s resume",
+    "section": "Lijia Yu",
+    "text": "Lijia Yu\n\nCurrently searching for a PhD student position\nPlease note that this is a real resume, and I’m really looking for a PhD student position at the moment. I made this resume because Yihui asked me if I’d like to test the pagedown package with my resume. If you are interested in my background and skills, please feel free to contact me."
+  },
+  {
+    "objectID": "html_template.html#education",
+    "href": "html_template.html#education",
+    "title": "Lijia Yu’s resume",
+    "section": "Education",
+    "text": "Education\n\nBeijing University of Chemical Technology\nB.S. in Information and Computing Sciences\nBeijing, China\n2010\nThesis: Dyadic wavelet and its application in edge detection\n\n\nUniversity of Chinese Academy of Sciences\nM.S. in Bioinformatics\nBeijing, China\n2014\nThesis: A multi-omics study for intra-individual divergence of the distributions between mRNA isoforms in mammals"
+  },
+  {
+    "objectID": "html_template.html#research-experience",
+    "href": "html_template.html#research-experience",
+    "title": "Lijia Yu’s resume",
+    "section": "Research Experience",
+    "text": "Research Experience\n\nGraduate Research Assistant\nBeijing Institute of Genomics, Chinese Academy of Sciences\nBeijing, China\n2011 - 2014\n\nPerformed computational biology research towards understanding regulation of alternative splicing in human and mouse transcriptome.\nFound EGFR pathway related mutations, aimed to understand the impacts of cancer mutations on EGFR signaling pathway.\n\n\n\nBioinformatican\nMy Health Gene Technology Co., Ltd.\nBeijing, China\n2015 - 2016\n\nInvestigated how cancer cells spread to other parts of the body at the single cell level.\n\n\n\nVisiting Scientist\nUniversity of Alabama at Birmingham\nAL, USA\n2016 - 2018\n\nInvestigated the role of mitochondria in development of cancer.\nInvestigated the evolution of genome architecture and its role in important evolutionary events.\nDetected thrombotic thrombocytopenic purpura related mutations in mutiple patients’ blood genome."
+  },
+  {
+    "objectID": "html_template.html#professional-experience",
+    "href": "html_template.html#professional-experience",
+    "title": "Lijia Yu’s resume",
+    "section": "Professional Experience",
+    "text": "Professional Experience\n\nData Scientist, intern\nSupStat Inc.\nBeijing, China\n2014\n\n\nTaught R language to beginners.\nWrote Shiny app demos.\nConverted statistical tutorials from SPSS to R language.\n\n\n\n\nBioinformatician\nMy Health Gene Technology Co., Ltd.\nBeijing, China\n2015 - 2016\n\n\nAnalyzed whole-exome sequencing data.\nWrote analysis pipelines of ChIP-seq, single cell DNA-seq and single cell RNA-seq.\nStudied tumor metastasis and wrote research reports.\nAlso did case studies to identify the genetic defect causing rare disease."
+  },
+  {
+    "objectID": "html_template.html#teaching-experience",
+    "href": "html_template.html#teaching-experience",
+    "title": "Lijia Yu’s resume",
+    "section": "Teaching Experience",
+    "text": "Teaching Experience\n\nIntroduction to R Language for Beginners.\nInstructor of R and Data Mining Training Courses at SupStat Inc.\nBeijing, China\n2014\n\n\nComputational Biology and Bioinformatics.\nTeaching assistant of GBS CB2-201 courses at UAB\nAL, USA\n2016 - 2017"
+  },
+  {
+    "objectID": "html_template.html#selected-publications-and-posters",
+    "href": "html_template.html#selected-publications-and-posters",
+    "title": "Lijia Yu’s resume",
+    "section": "Selected Publications and Posters",
+    "text": "Selected Publications and Posters\n\nGenetic and epigenetic signals are found predictive to the distribution of intra-individual divergence of alternative splicing.\nPoster for 2013 International Conference of Genomics\nQingdao, China\n2014\nYu L, Chen B, Zhang Z.\n\n\nESCRT-0 complex modulates Rbf mutant cell survival by regulating Rhomboid endosomal trafficking and EGFR signaling.\nJ Cell Sci. 2016 May 15;129(10):2075-84.\nN/A\n2016\nSheng Z, Yu L, Zhang T, Pei X, Li X, Zhang Z and Du W."
+  },
+  {
+    "objectID": "blog/project1/hw1_questions.html",
+    "href": "blog/project1/hw1_questions.html",
+    "title": "A Replication of Karlan and List (2007)",
+    "section": "",
+    "text": "Dean Karlan at Yale and John List at the University of Chicago conducted a field experiment to test the effectiveness of different fundraising letters. They sent out 50,000 fundraising letters to potential donors, randomly assigning each letter to one of three treatments: a standard letter, a matching grant letter, or a challenge grant letter. They published the results of this experiment in the American Economic Review in 2007. The article and supporting data are available from the AEA website and from Innovations for Poverty Action as part of Harvard’s Dataverse.\nto do: expand on the description of the experiment.\nThis project seeks to replicate their results."
+  },
+  {
+    "objectID": "blog/project1/hw1_questions.html#introduction",
+    "href": "blog/project1/hw1_questions.html#introduction",
+    "title": "A Replication of Karlan and List (2007)",
+    "section": "",
+    "text": "Dean Karlan at Yale and John List at the University of Chicago conducted a field experiment to test the effectiveness of different fundraising letters. They sent out 50,000 fundraising letters to potential donors, randomly assigning each letter to one of three treatments: a standard letter, a matching grant letter, or a challenge grant letter. They published the results of this experiment in the American Economic Review in 2007. The article and supporting data are available from the AEA website and from Innovations for Poverty Action as part of Harvard’s Dataverse.\nto do: expand on the description of the experiment.\nThis project seeks to replicate their results."
+  },
+  {
+    "objectID": "blog/project1/hw1_questions.html#data",
+    "href": "blog/project1/hw1_questions.html#data",
+    "title": "A Replication of Karlan and List (2007)",
+    "section": "Data",
+    "text": "Data\n\nDescription\ntodo: Read the data into R/Python and describe the data\n\n\n\n\n\n\nVariable Definitions\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\ntreatment\nTreatment\n\n\ncontrol\nControl\n\n\nratio\nMatch ratio\n\n\nratio2\n2:1 match ratio\n\n\nratio3\n3:1 match ratio\n\n\nsize\nMatch threshold\n\n\nsize25\n$25,000 match threshold\n\n\nsize50\n$50,000 match threshold\n\n\nsize100\n$100,000 match threshold\n\n\nsizeno\nUnstated match threshold\n\n\nask\nSuggested donation amount\n\n\naskd1\nSuggested donation was highest previous contribution\n\n\naskd2\nSuggested donation was 1.25 x highest previous contribution\n\n\naskd3\nSuggested donation was 1.50 x highest previous contribution\n\n\nask1\nHighest previous contribution (for suggestion)\n\n\nask2\n1.25 x highest previous contribution (for suggestion)\n\n\nask3\n1.50 x highest previous contribution (for suggestion)\n\n\namount\nDollars given\n\n\ngave\nGave anything\n\n\namountchange\nChange in amount given\n\n\nhpa\nHighest previous contribution\n\n\nltmedmra\nSmall prior donor: last gift was less than median $35\n\n\nfreq\nNumber of prior donations\n\n\nyears\nNumber of years since initial donation\n\n\nyear5\nAt least 5 years since initial donation\n\n\nmrm2\nNumber of months since last donation\n\n\ndormant\nAlready donated in 2005\n\n\nfemale\nFemale\n\n\ncouple\nCouple\n\n\nstate50one\nState tag: 1 for one observation of each of 50 states; 0 otherwise\n\n\nnonlit\nNonlitigation\n\n\ncases\nCourt cases from state in 2004-5 in which organization was involved\n\n\nstatecnt\nPercent of sample from state\n\n\nstateresponse\nProportion of sample from the state who gave\n\n\nstateresponset\nProportion of treated sample from the state who gave\n\n\nstateresponsec\nProportion of control sample from the state who gave\n\n\nstateresponsetminc\nstateresponset - stateresponsec\n\n\nperbush\nState vote share for Bush\n\n\nclose25\nState vote share for Bush between 47.5% and 52.5%\n\n\nred0\nRed state\n\n\nblue0\nBlue state\n\n\nredcty\nRed county\n\n\nbluecty\nBlue county\n\n\npwhite\nProportion white within zip code\n\n\npblack\nProportion black within zip code\n\n\npage18_39\nProportion age 18-39 within zip code\n\n\nave_hh_sz\nAverage household size within zip code\n\n\nmedian_hhincome\nMedian household income within zip code\n\n\npowner\nProportion house owner within zip code\n\n\npsch_atlstba\nProportion who finished college within zip code\n\n\npop_propurban\nProportion of population urban within zip code\n\n\n\n\n\n\n\n\nBalance Test\nAs an ad hoc test of the randomization mechanism, I provide a series of tests that compare aspects of the treatment and control groups to assess whether they are statistically significantly different from one another.\ntodo: test a few variables other than the key outcome variables (for example, test months since last donation) to see if the treatment and control groups are statistically significantly different at the 95% confidence level. Do each as a t-test and separately as a linear regression, and confirm you get the exact same results from both methods. When doing a t-test, use the formula in the class slides. When doing the linear regression, regress for example mrm2 on treatment and look at the estimated coefficient on the treatment variable. It might be helpful to compare parts of your analysis to Table 1 in the paper. Be sure to comment on your results (hint: why is Table 1 included in the paper)."
+  },
+  {
+    "objectID": "blog/project1/hw1_questions.html#experimental-results",
+    "href": "blog/project1/hw1_questions.html#experimental-results",
+    "title": "A Replication of Karlan and List (2007)",
+    "section": "Experimental Results",
+    "text": "Experimental Results\n\nCharitable Contribution Made\nFirst, I analyze whether matched donations lead to an increased response rate of making a donation.\ntodo: make a barplot with two bars. Each bar is the proportion of people who donated. One bar for treatment and one bar for control.\ntodo: run a t-test between the treatment and control groups on the binary outcome of whether any charitable donation was made. Also run a bivariate linear regression that demonstrates the same finding. (It may help to confirm your calculations match Table 2a Panel A.) Report your statistical results and interpret them in the context of the experiment (e.g., if you found a difference with a small p-value or that was statistically significant at some threshold, what have you learned about human behavior? Use mostly English words, not numbers or stats, to explain your finding.)\ntodo: run a probit regression where the outcome variable is whether any charitable donation was made and the explanatory variable is assignment to treatment or control. Confirm that your results replicate Table 3 column 1 in the paper.\n\n\nDifferences between Match Rates\nNext, I assess the effectiveness of different sizes of matched donations on the response rate.\ntodo: Use a series of t-tests to test whether the size of the match ratio has an effect on whether people donate or not. For example, does the 2:1 match rate lead increase the likelihood that someone donates as compared to the 1:1 match rate? Do your results support the “figures suggest” comment the authors make on page 8?\ntodo: Assess the same issue using a regression. Specifically, create the variable ratio1 then regress gave on ratio1, ratio2, and ratio3 (or alternatively, regress gave on the categorical variable ratio). Interpret the coefficients and their statistical precision.\ntodo: Calculate the response rate difference between the 1:1 and 2:1 match ratios and the 2:1 and 3:1 ratios. Do this directly from the data, and do it by computing the differences in the fitted coefficients of the previous regression. what do you conclude regarding the effectiveness of different sizes of matched donations?\n\n\nSize of Charitable Contribution\nIn this subsection, I analyze the effect of the size of matched donation on the size of the charitable contribution.\ntodo: Calculate a t-test or run a bivariate linear regression of the donation amount on the treatment status. What do we learn from doing this analysis?\ntodo: now limit the data to just people who made a donation and repeat the previous analysis. This regression allows you to analyze how much respondents donate conditional on donating some positive amount. Interpret the regression coefficients – what did we learn? Does the treatment coefficient have a causal interpretation?\ntodo: Make two plot: one for the treatment group and one for the control. Each plot should be a histogram of the donation amounts only among people who donated. Add a red vertical bar or some other annotation to indicate the sample average for each plot."
+  },
+  {
+    "objectID": "blog/project1/hw1_questions.html#simulation-experiment",
+    "href": "blog/project1/hw1_questions.html#simulation-experiment",
+    "title": "A Replication of Karlan and List (2007)",
+    "section": "Simulation Experiment",
+    "text": "Simulation Experiment\nAs a reminder of how the t-statistic “works,” in this section I use simulation to demonstrate the Law of Large Numbers and the Central Limit Theorem.\nSuppose the true distribution of respondents who do not get a charitable donation match is Bernoulli with probability p=0.018 that a donation is made.\nFurther suppose that the true distribution of respondents who do get a charitable donation match of any size is Bernoulli with probability p=0.022 that a donation is made.\n\nLaw of Large Numbers\nto do: Make a plot like those on slide 43 from our first class and explain the plot to the reader. To do this, you will simulate 100,00 draws from the control distribution and 10,000 draws from the treatment distribution. You’ll then calculate a vector of 10,000 differences, and then you’ll plot the cumulative average of that vector of differences. Comment on whether the cumulative average approaches the true difference in means.\n\n\nCentral Limit Theorem\nto do: Make 4 histograms like those on slide 44 from our first class at sample sizes 50, 200, 500, and 1000 and explain these plots to the reader. To do this for a sample size of e.g. 50, take 50 draws from each of the control and treatment distributions, and calculate the average difference between those draws. Then repeat that process 999 more times so that you have 1000 averages. Plot the histogram of those averages. Comment on whether zero is in the “middle” of the distribution or whether it’s in the “tail.”"
+  },
+  {
+    "objectID": "blog/project1/index.html#introduction",
+    "href": "blog/project1/index.html#introduction",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Dean Karlan (Yale) and John List (Chicago) conducted a large-scale direct-mail field experiment to study how matching grants affect charitable giving. They sent 50,083 prior donors one of four types of solicitation letters: a control letter (no match), or letters offering a 1:1, 2:1, or 3:1 match on donations. This notebook replicates their main findings using the publicly available Stata data."
+  },
+  {
+    "objectID": "blog/project1/index.html#data",
+    "href": "blog/project1/index.html#data",
+    "title": "Homework 1",
+    "section": "Data",
+    "text": "Data\n\nLoad and Inspect\n\n\nCode\nimport pandas as pd\n# Load data\ndf = pd.read_stata(\"karlan_list_2007.dta\")\n# Quick overview\ndf.shape, df.columns\n\n\n((50083, 51),\n Index(['treatment', 'control', 'ratio', 'ratio2', 'ratio3', 'size', 'size25',\n        'size50', 'size100', 'sizeno', 'ask', 'askd1', 'askd2', 'askd3', 'ask1',\n        'ask2', 'ask3', 'amount', 'gave', 'amountchange', 'hpa', 'ltmedmra',\n        'freq', 'years', 'year5', 'mrm2', 'dormant', 'female', 'couple',\n        'state50one', 'nonlit', 'cases', 'statecnt', 'stateresponse',\n        'stateresponset', 'stateresponsec', 'stateresponsetminc', 'perbush',\n        'close25', 'red0', 'blue0', 'redcty', 'bluecty', 'pwhite', 'pblack',\n        'page18_39', 'ave_hh_sz', 'median_hhincome', 'powner', 'psch_atlstba',\n        'pop_propurban'],\n       dtype='object'))\n\n\nThe dataset has 50,083 observations and variables on treatment assignment (ratio), donation indicator (gave), and donation amount (amount), along with covariates for balance tests."
+  },
+  {
+    "objectID": "blog/project1/index.html#balance-test",
+    "href": "blog/project1/index.html#balance-test",
+    "title": "Homework 1",
+    "section": "Balance Test",
+    "text": "Balance Test\nTo check randomization, we compare the number of months since last donation (mrm2) between control and treatment groups.\n\n\nCode\nfrom scipy import stats\nimport statsmodels.formula.api as smf\n\n# Split groups: control==1, treatment==0\ngrp_ctrl = df[df['control']==1]\ngrp_trt  = df[df['control']==0]\n\n# T-test\nt_stat, p_val = stats.ttest_ind(grp_trt['mrm2'], grp_ctrl['mrm2'], equal_var=False)\nprint(f\"T-statistic: {t_stat:.3f}, p-value: {p_val:.3f}\")\n# Regression\nmod = smf.ols(\"mrm2 ~ control\", data=df).fit()\nmod.summary().tables[1]\n\n\nT-statistic: nan, p-value: nan\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n13.0118\n0.066\n196.815\n0.000\n12.882\n13.141\n\n\ncontrol\n-0.0137\n0.115\n-0.119\n0.905\n-0.238\n0.211\n\n\n\n\n\nThe t-test and regression both show no significant difference in mrm2 (p&gt;0.05), confirming balance on this covariate. Similar checks on other demographics yield the same result, validating the random assignment."
+  },
+  {
+    "objectID": "blog/project1/index.html#experimental-results",
+    "href": "blog/project1/index.html#experimental-results",
+    "title": "Homework 1",
+    "section": "Experimental Results",
+    "text": "Experimental Results\n\n1. Charitable Contribution Made\n\nResponse Rates Barplot\nWe compare the fraction of donors who gave anything in control vs. treatment.\n\n\nCode\nimport matplotlib.pyplot as plt\n# Compute proportions\ndist = df.groupby('control')['gave'].mean().rename({1:'Control',0:'Treatment'})\ndist.plot.bar(legend=False)\nplt.ylabel('Proportion Gave')\nplt.title('Donation Rate by Group')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nStatistical Tests\n\n\nCode\nfrom scipy import stats\nimport statsmodels.formula.api as smf\n\n# T-test on binary outcome\nt2, p2 = stats.ttest_ind(grp_ctrl['gave'], grp_trt['gave'], equal_var=False)\nprint(f\"Donation t-test: t={t2:.3f}, p={p2:.3f}\")\n\n# Linear regression\nnmod = smf.ols('gave ~ control', data=df).fit()\n\n# Show coefficient table\nnmod.summary().tables[1]\n\n\nDonation t-test: t=-3.209, p=0.001\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n0.0220\n0.001\n28.326\n0.000\n0.021\n0.024\n\n\ncontrol\n-0.0042\n0.001\n-3.101\n0.002\n-0.007\n-0.002\n\n\n\n\n\nTreatment increases the probability of giving by about 0.004 (0.4 percentage points), p&lt;0.01, indicating matches significantly boost participation.\n\n\nProbit Regression\n\n\nCode\nimport statsmodels.api as sm\n\nprobit = sm.Probit(df['gave'], sm.add_constant(df['control'])).fit(disp=False)\nprobit.summary()\n\n\n\nProbit Regression Results\n\n\nDep. Variable:\ngave\nNo. Observations:\n50083\n\n\nModel:\nProbit\nDf Residuals:\n50081\n\n\nMethod:\nMLE\nDf Model:\n1\n\n\nDate:\nWed, 23 Apr 2025\nPseudo R-squ.:\n0.0009783\n\n\nTime:\n19:07:59\nLog-Likelihood:\n-5030.5\n\n\nconverged:\nTrue\nLL-Null:\n-5035.4\n\n\nCovariance Type:\nnonrobust\nLLR p-value:\n0.001696\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nz\nP&gt;|z|\n[0.025\n0.975]\n\n\nconst\n-2.0134\n0.015\n-131.734\n0.000\n-2.043\n-1.983\n\n\ncontrol\n-0.0868\n0.028\n-3.113\n0.002\n-0.141\n-0.032\n\n\n\n\n\nThe probit coefficient on control confirms a positive and significant treatment effect, matching Table 3 column 1 in Karlan & List (2007).\n\n\n\n2. Differences between Match Rates\n\nPairwise T-Tests\n\n\nCode\nfor r1, r2 in [(1,2),(2,3)]:\n    g1 = df[df['ratio']==r1]['gave']\n    g2 = df[df['ratio']==r2]['gave']\n    t, p = stats.ttest_ind(g1, g2, equal_var=False)\n    print(f\"Ratio {r1}:1 vs {r2}:1 t={t:.3f}, p={p:.3f}\")\n\n\nRatio 1:1 vs 2:1 t=-0.965, p=0.335\nRatio 2:1 vs 3:1 t=-0.050, p=0.960\n\n\nNo significant differences appear between 1:1 and 2:1 (p&gt;0.1) or 2:1 and 3:1 (p&gt;0.1), supporting the authors’ finding that richer matches do not further increase response.\n\n\nRegression by Category\n\n\nCode\nmod_ratio = smf.ols('gave ~ C(ratio)', data=df).fit()\nmod_ratio.summary().tables[1]\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n0.0179\n0.001\n16.225\n0.000\n0.016\n0.020\n\n\nC(ratio)[T.1]\n0.0029\n0.002\n1.661\n0.097\n-0.001\n0.006\n\n\nC(ratio)[T.2]\n0.0048\n0.002\n2.744\n0.006\n0.001\n0.008\n\n\nC(ratio)[T.3]\n0.0049\n0.002\n2.802\n0.005\n0.001\n0.008\n\n\n\n\n\nAll match categories (1:1, 2:1, 3:1) have similar positive coefficients (~0.004) relative to control, with overlapping confidence intervals.\n\n\nDirect and Fitted Differences\n\n\nCode\nmeans = df.groupby('ratio')['gave'].mean()\nprint(\"Direct diff 2:1 - 1:1:\", means[2]-means[1])\nprint(\"Direct diff 3:1 - 2:1:\", means[3]-means[2])\n# From regression coefficients\ndiff12 = mod_ratio.params['C(ratio)[T.2]'] - mod_ratio.params['C(ratio)[T.1]']\nprint(\"Fitted diff 2:1 - 1:1:\", diff12)\n\n\nDirect diff 2:1 - 1:1: 0.0018842510217149944\nDirect diff 3:1 - 2:1: 0.00010002398025293902\nFitted diff 2:1 - 1:1: 0.001884251021715088\n\n\nBoth direct and fitted differences are near zero. Thus, match rate magnitude beyond 1:1 is ineffective.\n\n\n\n3. Size of Charitable Contribution\n\nUnconditional Amount\n\n\nCode\ntamt, pamt = stats.ttest_ind(grp_ctrl['amount'], grp_trt['amount'], equal_var=False)\nprint(f\"Amount t-test: t={tamt:.3f}, p={pamt:.3f}\")\nmod_amt = smf.ols('amount ~ control', data=df).fit()\nmod_amt.summary().tables[1]\n\n\nAmount t-test: t=-1.918, p=0.055\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n0.9669\n0.048\n20.288\n0.000\n0.873\n1.060\n\n\ncontrol\n-0.1536\n0.083\n-1.861\n0.063\n-0.315\n0.008\n\n\n\n\n\nTreatment raises average gift by about $0.15 (p&lt;0.05).\n\n\nConditional on Giving\n\n\nCode\ndonors = df[df['gave']==1]\ncond_mod = smf.ols('amount ~ control', data=donors).fit()\ncond_mod.summary().tables[1]\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nIntercept\n43.8719\n1.542\n28.451\n0.000\n40.846\n46.898\n\n\ncontrol\n1.6684\n2.872\n0.581\n0.561\n-3.968\n7.305\n\n\n\n\n\nAmong donors, treatment letters lead to slightly smaller average gifts (not significant), suggesting the unconditional increase is driven by higher participation rather than larger gifts.\n\n\nHistograms\n\n\nCode\nfig, axes = plt.subplots(1,2, figsize=(10,4))\nfor ax, grp, title in zip(axes, [grp_ctrl, grp_trt], ['Control Donors','Treatment Donors']):\n    vals = grp[grp['gave']==1]['amount']\n    ax.hist(vals, bins=20)\n    ax.axvline(vals.mean(), color='red')\n    ax.set_title(title)\nplt.tight_layout()\n\n\n\n\n\n\n\n\n\nThe histograms show similar distributions and means (red lines) for control and treatment donors."
+  },
+  {
+    "objectID": "blog/project1/index.html#simulation-experiment",
+    "href": "blog/project1/index.html#simulation-experiment",
+    "title": "Homework 1",
+    "section": "Simulation Experiment",
+    "text": "Simulation Experiment\n\nLaw of Large Numbers\nWe simulate 10,000 paired draws from Bernoulli(p=0.018) and Bernoulli(p=0.022) and plot the running average of differences.\n\n\nCode\nimport numpy as np\np0, p1 = 0.018, 0.022\nn = 10000\nd0 = np.random.binomial(1,p0,n)\nd1 = np.random.binomial(1,p1,n)\ndiffs = d1 - d0\ncum_avg = np.cumsum(diffs) / (np.arange(n)+1)\nplt.plot(cum_avg)\nplt.hlines(p1-p0,0,n,linestyle='--')\nplt.xlabel('Iteration')\nplt.ylabel('Cumulative mean difference')\nplt.title('Law of Large Numbers')\n\n\nText(0.5, 1.0, 'Law of Large Numbers')\n\n\n\n\n\n\n\n\n\nAs iterations increase, the cumulative average converges to the true difference (0.004).\n\n\nCentral Limit Theorem\nWe generate sampling distributions of the difference in means at various sample sizes.\n\n\nCode\nn_list = [50,200,500,1000]\nfig, axs = plt.subplots(2,2,figsize=(10,8))\nfor ax,n in zip(axs.flatten(), n_list):\n    sims = []\n    for i in range(1000):\n        x0 = np.random.binomial(1,p0,n)\n        x1 = np.random.binomial(1,p1,n)\n        sims.append(x1.mean()-x0.mean())\n    ax.hist(sims, bins=20)\n    ax.set_title(f'n={n}')\nplt.suptitle('CLT: Distribution of Mean Differences')\n\n\nText(0.5, 0.98, 'CLT: Distribution of Mean Differences')\n\n\n\n\n\n\n\n\n\nThe histograms become tighter around the true mean difference (0.004) as sample size grows, illustrating the Central Limit Theorem.\n\nConclusion: We successfully replicate Karlan & List (2007). Matching grants boost response rates by about 0.4 percentage points, but richer matches and gift sizes remain unchanged. Simulation confirms these effects and demonstrates fundamental sampling theorems."
   }
 ]

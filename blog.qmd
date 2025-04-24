@@ -3,7 +3,7 @@ title: "My Projects"
 listing:
     contents: blog
     type: grid
-    sort: "date desc"
+    sort: weight
     categories: false
 
 ---

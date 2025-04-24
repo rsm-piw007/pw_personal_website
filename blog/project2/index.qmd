@@ -1,0 +1,16 @@
+---
+title: "Homework 2"
+author: "Pin Wang"
+date: "2025-04-27"
+weight: 2
+callout-appearance: minimal
+execute:
+  python: ./.venv/bin/python  
+  echo: true
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    theme: cerulean
+---
