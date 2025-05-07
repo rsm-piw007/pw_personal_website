@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <section id="load-and-inspect" class="level3">
 <h3 class="anchored" data-anchor-id="load-and-inspect">Load and Inspect</h3>
-<div id="b441a09f" class="cell" data-execution_count="1">
+<div id="16562f9b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick overview</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df.shape, df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>((50083, 51),
  Index(['treatment', 'control', 'ratio', 'ratio2', 'ratio3', 'size', 'size25',
         'size50', 'size100', 'sizeno', 'ask', 'askd1', 'askd2', 'askd3', 'ask1',
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="balance-test" class="level2">
 <h2 class="anchored" data-anchor-id="balance-test">Balance Test</h2>
 <p>To check randomization, we compare the number of months since last donation (<code>mrm2</code>) between control and treatment groups.</p>
-<div id="ecc0b11e" class="cell" data-execution_count="2">
+<div id="69fc4dde" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -266,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>T-statistic: nan, p-value: nan</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="response-rates-barplot" class="level4">
 <h4 class="anchored" data-anchor-id="response-rates-barplot">Response Rates Barplot</h4>
 <p>We compare the fraction of donors who gave anything in control vs.&nbsp;treatment.</p>
-<div id="08e30053" class="cell" data-execution_count="3">
+<div id="f2511d66" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -331,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="statistical-tests" class="level4">
 <h4 class="anchored" data-anchor-id="statistical-tests">Statistical Tests</h4>
-<div id="93cfb105" class="cell" data-execution_count="4">
+<div id="48f1d47a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Donation t-test: t=-3.209, p=0.001</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="probit-regression" class="level4">
 <h4 class="anchored" data-anchor-id="probit-regression">Probit Regression</h4>
-<div id="9d2971c3" class="cell" data-execution_count="5">
+<div id="5868875a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>probit <span class="op">=</span> sm.Probit(df[<span class="st">'gave'</span>], sm.add_constant(df[<span class="st">'control'</span>])).fit(disp<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>probit.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Probit Regression Results</caption>
 <tbody>
@@ -420,13 +420,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 23 Apr 2025</td>
+<td>Tue, 06 May 2025</td>
 <td data-quarto-table-cell-role="th">Pseudo R-squ.:</td>
 <td>0.0009783</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>19:07:59</td>
+<td>20:42:20</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-5030.5</td>
 </tr>
@@ -486,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="differences-between-match-rates">2. Differences between Match Rates</h3>
 <section id="pairwise-t-tests" class="level4">
 <h4 class="anchored" data-anchor-id="pairwise-t-tests">Pairwise T-Tests</h4>
-<div id="6b5d98c2" class="cell" data-execution_count="6">
+<div id="13684059" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r1, r2 <span class="kw">in</span> [(<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">3</span>)]:</span>
@@ -504,13 +504,13 @@ Ratio 2:1 vs 3:1 t=-0.050, p=0.960</code></pre>
 </section>
 <section id="regression-by-category" class="level4">
 <h4 class="anchored" data-anchor-id="regression-by-category">Regression by Category</h4>
-<div id="0dc5ce67" class="cell" data-execution_count="7">
+<div id="573575d5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod_ratio <span class="op">=</span> smf.ols(<span class="st">'gave ~ C(ratio)'</span>, data<span class="op">=</span>df).fit()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mod_ratio.summary().tables[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
@@ -566,7 +566,7 @@ Ratio 2:1 vs 3:1 t=-0.050, p=0.960</code></pre>
 </section>
 <section id="direct-and-fitted-differences" class="level4">
 <h4 class="anchored" data-anchor-id="direct-and-fitted-differences">Direct and Fitted Differences</h4>
-<div id="be90049c" class="cell" data-execution_count="8">
+<div id="2b6971ea" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> df.groupby(<span class="st">'ratio'</span>)[<span class="st">'gave'</span>].mean()</span>
@@ -589,7 +589,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <h3 class="anchored" data-anchor-id="size-of-charitable-contribution">3. Size of Charitable Contribution</h3>
 <section id="unconditional-amount" class="level4">
 <h4 class="anchored" data-anchor-id="unconditional-amount">Unconditional Amount</h4>
-<div id="59070ec2" class="cell" data-execution_count="9">
+<div id="22a1fc8b" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tamt, pamt <span class="op">=</span> stats.ttest_ind(grp_ctrl[<span class="st">'amount'</span>], grp_trt[<span class="st">'amount'</span>], equal_var<span class="op">=</span><span class="va">False</span>)</span>
@@ -600,7 +600,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Amount t-test: t=-1.918, p=0.055</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
@@ -638,14 +638,14 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 </section>
 <section id="conditional-on-giving" class="level4">
 <h4 class="anchored" data-anchor-id="conditional-on-giving">Conditional on Giving</h4>
-<div id="4357f8c6" class="cell" data-execution_count="10">
+<div id="856e44da" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>donors <span class="op">=</span> df[df[<span class="st">'gave'</span>]<span class="op">==</span><span class="dv">1</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cond_mod <span class="op">=</span> smf.ols(<span class="st">'amount ~ control'</span>, data<span class="op">=</span>donors).fit()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cond_mod.summary().tables[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
@@ -683,7 +683,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 </section>
 <section id="histograms" class="level4">
 <h4 class="anchored" data-anchor-id="histograms">Histograms</h4>
-<div id="ee53eae6" class="cell" data-execution_count="11">
+<div id="bc5108e4" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
@@ -711,7 +711,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <section id="law-of-large-numbers" class="level3">
 <h3 class="anchored" data-anchor-id="law-of-large-numbers">Law of Large Numbers</h3>
 <p>We simulate 10,000 paired draws from Bernoulli(p=0.018) and Bernoulli(p=0.022) and plot the running average of differences.</p>
-<div id="c288855c" class="cell" data-execution_count="12">
+<div id="8d24a546" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -727,7 +727,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cumulative mean difference'</span>)</span>
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Law of Large Numbers'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>Text(0.5, 1.0, 'Law of Large Numbers')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -743,7 +743,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <section id="central-limit-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h3>
 <p>We generate sampling distributions of the difference in means at various sample sizes.</p>
-<div id="c1b89cc8" class="cell" data-execution_count="13">
+<div id="8f721645" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>n_list <span class="op">=</span> [<span class="dv">50</span>,<span class="dv">200</span>,<span class="dv">500</span>,<span class="dv">1000</span>]</span>
@@ -758,7 +758,7 @@ Fitted diff 2:1 - 1:1: 0.001884251021715088</code></pre>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'CLT: Distribution of Mean Differences'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>Text(0.5, 0.98, 'CLT: Distribution of Mean Differences')</code></pre>
 </div>
 <div class="cell-output cell-output-display">

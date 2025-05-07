@@ -14,3 +14,189 @@ format:
     code-fold: true
     theme: cerulean
 ---
+## Blueprinty Case Study
+
+### Introduction
+
+Blueprinty is a small firm that makes software for developing blueprints specifically for submitting patent applications to the US patent office. Their marketing team would like to make the claim that patent applicants using Blueprinty's software are more successful in getting their patent applications approved. Ideal data to study such an effect might include the success rate of patent applications before using Blueprinty's software and after using it. Unfortunately, such data is not available.
+
+However, Blueprinty has collected data on 1,500 mature (non-startup) engineering firms. The data include each firm's number of patents awarded over the last 5 years (`patents`), regional location (`region`), age since incorporation (`age`), and whether or not the firm uses Blueprinty's software (`iscustomer`). We will use Poisson models to explore whether using Blueprinty’s software is associated with more patents.
+
+### Data
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.special import gammaln
+from scipy import optimize
+import statsmodels.api as sm
+from statsmodels.iolib.summary2 import summary_col
+
+# Read Blueprinty data
+df_bp = pd.read_csv("blueprinty.csv")
+```
+
+#### Comparing Patents by Customer Status
+
+```{python}
+plt.figure(figsize=(8, 5))
+sns.histplot(data=df_bp, x="patents", hue="iscustomer", element="step", stat="count", bins=15, palette="Set2")
+plt.xlabel("Number of Patents (last 5 years)")
+plt.ylabel("Count of Firms")
+plt.title("Distribution of Patent Counts by Blueprinty Customer Status")
+plt.show()
+
+print(df_bp.groupby('iscustomer')['patents'].mean())
+```
+
+> **Observation:** Blueprinty customers have a higher average patent count, but age and region differences warrant controls.
+
+#### Comparing Age and Region by Customer Status
+
+```{python}
+sns.boxplot(data=df_bp, x='iscustomer', y='age', palette='Set2')
+plt.title('Firm Age by Customer Status')
+plt.show()
+
+sns.countplot(data=df_bp, x='region', hue='iscustomer', palette='Set2')
+plt.title('Regional Distribution by Customer Status')
+plt.show()
+```
+
+### Simple Poisson Model
+
+```{python}
+def loglik_poisson(lmbda, y):
+    return np.sum(y * np.log(lmbda) - lmbda - gammaln(y + 1))
+
+y = df_bp['patents'].values
+lams = np.linspace(0.1, y.mean()*2, 200)
+lls = [loglik_poisson(l, y) for l in lams]
+plt.plot(lams, lls)
+plt.axvline(y.mean(), linestyle='--', color='red')
+plt.show()
+print(f"MLE (analytical) = {y.mean():.2f}")
+```
+
+```{python}
+res = optimize.minimize_scalar(lambda L: -loglik_poisson(L, y), bounds=(0.1, y.mean()*3), method='bounded')
+print(f"MLE via optimize = {res.x:.2f}, success={res.success}")
+```
+
+### Poisson Regression
+
+```{python}
+df_bp['age_z'] = (df_bp['age'] - df_bp['age'].mean()) / df_bp['age'].std()
+df_bp['age_sq_z'] = ((df_bp['age']**2) - (df_bp['age']**2).mean()) / (df_bp['age']**2).std()
+X_df = pd.get_dummies(df_bp[['age_z','age_sq_z','region','iscustomer']], drop_first=True)
+X_df.insert(0, 'Intercept', 1)
+X_mat = X_df.astype(float).to_numpy()
+y = df_bp['patents'].values.astype(float)
+```
+
+```{python}
+from scipy.optimize import minimize
+def negll(beta, y, X):
+    eta = np.clip(X @ beta, -20, 20)
+    mu = np.exp(eta)
+    return -np.sum(y * eta - mu - gammaln(y + 1))
+
+initial_params = np.zeros(X_mat.shape[1])
+res_reg = minimize(
+    negll,
+    initial_params,
+    args=(y, X_mat),
+    method='BFGS',
+    options={'disp': True, 'gtol': 1e-8, 'maxiter': 5000}
+)
+
+beta_hat = res_reg.x
+se_hat = np.sqrt(np.diag(res_reg.hess_inv))
+result_table = pd.DataFrame({'coef': beta_hat, 'se': se_hat}, index=X_df.columns)
+print("Converged:", res_reg.success)
+print(result_table)
+```
+```{python}
+# Built-in statsmodels Poisson
+model_bp = sm.GLM(y, X_df.astype(float), family=sm.families.Poisson()).fit()
+print(model_bp.summary())
+```
+### Analysis of Poisson Regression Results
+
+The Poisson regression model yields several important insights:
+
+- **Firm Age**: The coefficients on `age_z` and `age_sq_z` suggest a nonlinear relationship: patent counts increase with firm age up to a point, then decline. This inverted-U pattern may reflect a life-cycle effect.
+- **Blueprinty Customers**: The key coefficient for `iscustomer` is approximately **0.21**, and statistically significant. The exponentiated value, `exp(0.21) ≈ 1.23`, indicates that customers of Blueprinty file **23% more patents** than non-customers, holding other factors constant.
+- **Region Variables**: All region dummy coefficients are small and not statistically significant, implying that regional differences are minimal when other factors are controlled for.
+
+These results align with the observed group means and validate the firm's marketing claim to some extent, though we caution that causality is not guaranteed.
+
+```{python}
+# Marginal effect for iscustomer
+# Ensure column order matches model training data
+X_base = X_df.copy().astype(float)
+X0 = X_base.copy()
+X1 = X_base.copy()
+
+# Set iscustomer dummy column
+iscustomer_col = [col for col in X_base.columns if 'iscustomer' in col]
+if iscustomer_col:
+    col = iscustomer_col[0]
+    X0[col] = 0
+    X1[col] = 1
+
+# Ensure column alignment
+X0 = X0[model_bp.params.index]
+X1 = X1[model_bp.params.index]
+
+# Predict
+pred0 = model_bp.predict(X0)
+pred1 = model_bp.predict(X1)
+print("Avg patent increase for Blueprinty customers:", (pred1 - pred0).mean())
+```
+
+> **Conclusion:** Controlling for age and region, Blueprinty customers average about 1.23 times more patents over 5 years, suggesting a potential benefit of the software. Manual MLE implementation did not fully converge, but the results closely match the GLM estimates.
+
+
+---
+
+## Airbnb Case Study
+
+### Data & EDA
+
+```{python}
+df_ab = pd.read_csv("airbnb.csv", parse_dates=['last_scraped','host_since'])
+df_ab['days_listed'] = (df_ab['last_scraped'] - df_ab['host_since']).dt.days
+vars_keep = ['number_of_reviews','room_type','days_listed','bathrooms','bedrooms','price',
+             'review_scores_cleanliness','review_scores_location','review_scores_value','instant_bookable']
+df_ab = df_ab.dropna(subset=vars_keep)
+plt.hist(df_ab['number_of_reviews'], bins=30)
+plt.title('Review Count Distribution')
+plt.show()
+```
+
+### Poisson Regression for Reviews
+
+```{python}
+df_ab['clean'] = df_ab['review_scores_cleanliness']
+X_ab = pd.get_dummies(df_ab[['days_listed','room_type','bathrooms','bedrooms','price','clean',
+                              'review_scores_location','review_scores_value','instant_bookable']], drop_first=True)
+X_ab.insert(0,'Intercept',1)
+X_ab = X_ab.astype(float)
+y_ab = df_ab['number_of_reviews'].values
+model_ab = sm.GLM(y_ab, X_ab, family=sm.families.Poisson()).fit()
+print(summary_col([model_ab], float_format='%.3f', stars=True))
+```
+
+### Analysis of Airbnb Regression Results
+
+The Poisson regression for Airbnb reviews reveals several clear patterns:
+
+- **Days Listed**: Listings that have been active for more days receive significantly more reviews, consistent with cumulative exposure.
+- **Room Type**: Entire-home listings get more reviews than shared/private rooms, likely due to higher demand and broader appeal.
+- **Instant Bookable**: This convenience feature is positively associated with review count, indicating user preference for low-friction booking experiences.
+- **Cleanliness, Location, and Value Scores**: Higher review sub-scores positively correlate with the number of reviews, suggesting a feedback loop between guest satisfaction and visibility.
+
+Overall, the model identifies actionable levers for hosts seeking to increase guest engagement through reviews.
