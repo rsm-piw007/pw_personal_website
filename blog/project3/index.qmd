@@ -1,0 +1,213 @@
+---
+title: "Homework 3"
+author: "Pin Wang"
+date: "2025-05-27"
+weight: 1
+callout-appearance: minimal
+execute:
+  python: ./.venv/bin/python  
+  echo: true
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    theme: cerulean
+---
+
+This assignment explores two methods for estimating the Multinomial Logit (MNL) model:  
+1. **Maximum Likelihood Estimation (MLE)**  
+2. **Bayesian Estimation using Metropolis-Hastings MCMC**  
+
+We use simulated conjoint data from a hypothetical survey on video streaming service preferences.
+
+---
+
+## 1. Likelihood for the MNL Model
+
+We consider $n$ consumers each selecting one product $j$ from $J$ alternatives. The utility they derive from alternative $j$ is:
+
+$$ U_{ij} = x_j'\beta + \varepsilon_{ij} $$
+
+Assuming $\varepsilon_{ij}$ follows an i.i.d. Gumbel distribution leads to the standard MNL formulation:
+
+$$ \mathbb{P}_i(j) = \frac{\exp(x_j'\beta)}{\sum_{k=1}^J \exp(x_k'\beta)} $$
+
+The log-likelihood across all consumers is:
+
+$$ \ell(\beta) = \sum_{i=1}^n \sum_{j=1}^J \delta_{ij} \log(\mathbb{P}_i(j)) $$
+
+---
+
+## 2. Simulated Conjoint Data
+
+We simulate a dataset of 100 consumers, each completing 10 choice tasks among 3 alternatives. Each alternative has:
+
+- Brand: Netflix (N), Prime (P), or Hulu (H)
+- Ads: Yes or No
+- Price: \$8–\$32
+
+Part-worth utility parameters:
+
+- $\beta_{Netflix}=1.0$, $\beta_{Prime}=0.5$ (Hulu = baseline)
+- $\beta_{Ads} = -0.8$
+- $\beta_{Price} = -0.1$
+
+```{r}
+set.seed(123)
+brand <- c("N", "P", "H")
+ad <- c("Yes", "No")
+price <- seq(8, 32, by=4)
+
+profiles <- expand.grid(brand = brand, ad = ad, price = price)
+m <- nrow(profiles)
+
+b_util <- c(N = 1.0, P = 0.5, H = 0)
+a_util <- c(Yes = -0.8, No = 0.0)
+p_util <- function(p) -0.1 * p
+
+n_peeps <- 100
+n_tasks <- 10
+n_alts <- 3
+
+sim_one <- function(id) {
+    datlist <- list()
+    for (t in 1:n_tasks) {
+        dat <- cbind(resp = id, task = t, profiles[sample(m, size = n_alts), ])
+        dat$v <- b_util[dat$brand] + a_util[dat$ad] + p_util(dat$price)
+        dat$e <- -log(-log(runif(n_alts)))
+        dat$u <- dat$v + dat$e
+        dat$choice <- as.integer(dat$u == max(dat$u))
+        datlist[[t]] <- dat
+    }
+    do.call(rbind, datlist)
+}
+
+conjoint_data <- do.call(rbind, lapply(1:n_peeps, sim_one))
+```
+
+---
+
+## 3. Preparing the Data for Estimation
+
+We encode categorical variables into binary features and prepare the design matrix for estimation.
+
+```{r}
+conjoint_data$brand_N <- ifelse(conjoint_data$brand == "N", 1, 0)
+conjoint_data$brand_P <- ifelse(conjoint_data$brand == "P", 1, 0)
+conjoint_data$ads <- ifelse(conjoint_data$ad == "Yes", 1, 0)
+```
+
+---
+
+## 4. Estimation via Maximum Likelihood
+
+We estimate the model by maximizing the log-likelihood function using `optim()`:
+
+```{r}
+log_lik <- function(beta, data) {
+  b_N <- beta[1]
+  b_P <- beta[2]
+  b_ads <- beta[3]
+  b_price <- beta[4]
+
+  data$utility <- with(data, b_N * brand_N + b_P * brand_P + b_ads * ads + b_price * price)
+  data$exp_util <- exp(data$utility)
+  data$sum_exp_util <- ave(data$exp_util, data$resp, data$task, FUN = sum)
+  data$prob <- data$exp_util / data$sum_exp_util
+
+  ll <- sum(log(data$prob[data$choice == 1]))
+  return(-ll)
+}
+
+start_vals <- c(0, 0, 0, 0)
+mle_fit <- optim(start_vals, log_lik, data = conjoint_data, hessian = TRUE)
+```
+
+MLE results and confidence intervals:
+
+```{r}
+estimates <- mle_fit$par
+se <- sqrt(diag(solve(mle_fit$hessian)))
+ci <- cbind(estimates - 1.96 * se, estimates + 1.96 * se)
+mle_results <- data.frame(Parameter = c("Netflix", "Prime", "Ads", "Price"),
+                          Estimate = estimates, SE = se,
+                          CI_Lower = ci[,1], CI_Upper = ci[,2])
+knitr::kable(mle_results, digits = 3)
+```
+
+---
+
+## 5. Bayesian Estimation via MCMC
+
+We implement Metropolis-Hastings sampling using normal priors:
+
+```{r}
+log_prior <- function(beta) {
+  sum(dnorm(beta[1:3], 0, 5, log = TRUE)) + dnorm(beta[4], 0, 1, log = TRUE)
+}
+
+log_posterior <- function(beta, data) {
+  -log_lik(beta, data) + log_prior(beta)
+}
+
+run_mcmc <- function(start, steps, data) {
+  current <- start
+  samples <- matrix(NA, nrow = steps, ncol = 4)
+  for (s in 1:steps) {
+    proposal <- current + c(rnorm(3, 0, 0.05), rnorm(1, 0, 0.005))
+    log_alpha <- log_posterior(proposal, data) - log_posterior(current, data)
+    if (log(runif(1)) < log_alpha) current <- proposal
+    samples[s, ] <- current
+  }
+  return(samples)
+}
+
+samples <- run_mcmc(estimates, 11000, conjoint_data)
+posterior <- samples[1001:11000, ]
+```
+
+Posterior summaries and diagnostic plots:
+
+```{r}
+posterior_means <- colMeans(posterior)
+posterior_sd <- apply(posterior, 2, sd)
+posterior_ci <- t(apply(posterior, 2, function(x) quantile(x, c(0.025, 0.975))))
+
+posterior_summary <- data.frame(Parameter = c("Netflix", "Prime", "Ads", "Price"),
+                                Mean = posterior_means,
+                                SD = posterior_sd,
+                                CI_Lower = posterior_ci[,1],
+                                CI_Upper = posterior_ci[,2])
+knitr::kable(posterior_summary, digits = 3)
+
+```{r}
+# Trace plots for all parameters
+par(mfrow=c(2,2))
+plot(posterior[,1], type="l", main="Trace: Beta Netflix", ylab="Value", xlab="Iteration")
+plot(posterior[,2], type="l", main="Trace: Beta Prime", ylab="Value", xlab="Iteration")
+plot(posterior[,3], type="l", main="Trace: Beta Ads", ylab="Value", xlab="Iteration")
+plot(posterior[,4], type="l", main="Trace: Beta Price", ylab="Value", xlab="Iteration")
+
+# Posterior histograms for all parameters
+par(mfrow=c(2,2))
+hist(posterior[,1], breaks=30, main="Posterior: Beta Netflix", xlab="Value")
+hist(posterior[,2], breaks=30, main="Posterior: Beta Prime", xlab="Value")
+hist(posterior[,3], breaks=30, main="Posterior: Beta Ads", xlab="Value")
+hist(posterior[,4], breaks=30, main="Posterior: Beta Price", xlab="Value")
+```
+```
+
+---
+
+## 6. Discussion
+
+- **Interpretation**:  
+  $\beta_{Netflix} > \beta_{Prime}$ implies respondents prefer Netflix over Prime.  
+  The negative $\beta_{Price}$ indicates consumers value lower prices.
+
+- **MLE vs. Bayesian**:  
+  Results are consistent across methods. MCMC posterior means and intervals closely match MLE estimates, increasing confidence in inference.
+
+- **Extension**:  
+  To handle real-world heterogeneity, we can extend the MNL to a **Hierarchical Bayes Model**, introducing individual-level betas drawn from a population distribution (e.g., $\beta_i \sim \mathcal{N}(\mu, \Sigma)$), allowing personalization and richer insights.
