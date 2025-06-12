@@ -1,0 +1,226 @@
+---
+title: "Homework 4"
+author: "Pin Wang"
+date: "2025-06-11"
+weight: 4
+callout-appearance: minimal
+execute:
+  python: ./.venv/bin/python  
+  echo: true
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    theme: cerulean
+---
+## Introduction
+
+This blog post presents two machine learning analyses:
+
+1. **Latent-Class Multinomial Logit (LC-MNL)**: An unsupervised segmentation approach based on Kamakura & Russell (1989), applied to yogurt choice data.
+2. **Key Drivers Analysis**: A supervised regression technique to understand which factors most influence customer satisfaction.
+
+The goal is to demonstrate practical implementations of advanced modeling techniques using real-world datasets.
+
+---
+
+## Dataset Descriptions
+
+- **`yogurt_data.csv`**: Contains choice data for 4 yogurt options, their features (`f1`-`f4`) and prices (`p1`-`p4`).
+- **`data_for_drivers_analysis.csv`**: Contains binary attributes and satisfaction ratings for a set of brands.
+
+---
+
+## Part 1: Latent-Class MNL (Yogurt Choice)
+
+```{python}
+import pandas as pd
+import numpy as np
+from scipy.special import softmax, logsumexp
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+
+# Load yogurt data
+yogurt_df = pd.read_csv("yogurt_data.csv")
+
+# Prepare design matrix
+def prepare_choice_data(df):
+    N = df.shape[0]  # number of choice situations
+    J = 4  # number of alternatives
+    X = np.zeros((N, J, 2))  # price and feature
+    for j in range(J):
+        X[:, j, 0] = df[f"p{j+1}"].values  # price
+        X[:, j, 1] = df[f"f{j+1}"].values  # feature
+    y = np.argmax(df[["y1", "y2", "y3", "y4"]].values, axis=1)
+    return X, y
+
+X, y = prepare_choice_data(yogurt_df)
+```
+
+### Standard Multinomial Logit (Aggregate MNL)
+
+```{python}
+# Reshape to long format
+N, J, D = X.shape
+X_long = X.reshape(N * J, D)
+y_long = np.repeat(y, J)
+alt_id = np.tile(np.arange(J), N)
+is_choice = (alt_id == y_long).astype(int)
+
+# Create interaction matrix manually
+X_mnl = pd.DataFrame(X_long, columns=["price", "feature"])
+X_mnl["alt"] = alt_id
+X_mnl = pd.get_dummies(X_mnl, columns=["alt"], drop_first=True)
+
+# Fit logistic regression model
+mnl_model = LogisticRegression(fit_intercept=False, solver='lbfgs')
+mnl_model.fit(X_mnl, is_choice)
+ll_mnl = mnl_model.predict_log_proba(X_mnl)[np.arange(N*J), is_choice].sum()
+k_mnl = X_mnl.shape[1]
+BIC_mnl = -2 * ll_mnl + k_mnl * np.log(N)
+
+print("Aggregate MNL Log-Likelihood:", ll_mnl)
+print("Aggregate MNL BIC:", BIC_mnl)
+```
+
+### EM Algorithm for Latent Class MNL with BIC Comparison
+
+```{python}
+def em_latent_class_mnl(X, y, K=2, max_iter=100, tol=1e-4):
+    N, J, D = X.shape
+    np.random.seed(0)
+    pi_k = np.ones(K) / K
+    beta_k = np.random.normal(0, 0.1, size=(K, D))
+    r_nk = np.zeros((N, K))
+
+    def compute_log_likelihood():
+        ll = 0
+        for n in range(N):
+            logits = np.array([X[n] @ beta_k[k] for k in range(K)])
+            probs = np.array([softmax(logit) for logit in logits])
+            ll_n = np.log(np.sum([pi_k[k] * probs[k, y[n]] for k in range(K)]))
+            ll += ll_n
+        return ll
+
+    prev_ll = -np.inf
+    for iter in range(max_iter):
+        for n in range(N):
+            log_rnk = []
+            for k in range(K):
+                logit = X[n] @ beta_k[k]
+                prob = softmax(logit)
+                log_rnk.append(np.log(pi_k[k]) + np.log(prob[y[n]]))
+            log_rnk = np.array(log_rnk)
+            r_nk[n] = np.exp(log_rnk - logsumexp(log_rnk))
+
+        Nk = r_nk.sum(axis=0)
+        pi_k = Nk / N
+        for k in range(K):
+            grad = np.zeros(D)
+            for n in range(N):
+                x = X[n]
+                y_onehot = np.zeros(J)
+                y_onehot[y[n]] = 1
+                probs = softmax(x @ beta_k[k])
+                grad += r_nk[n, k] * np.sum((y_onehot - probs)[:, None] * x, axis=0)
+            beta_k[k] += 0.01 * grad / Nk[k]
+
+        ll = compute_log_likelihood()
+        if np.abs(ll - prev_ll) < tol:
+            break
+        prev_ll = ll
+    return beta_k, pi_k, r_nk, ll
+
+# Compare BIC across K = 2 to 5
+bic_results = []
+for K in range(2, 6):
+    beta_k, pi_k, r_nk, ll = em_latent_class_mnl(X, y, K=K)
+    k_params = K * D + (K - 1)  # K betas + K-1 for class probabilities
+    BIC = -2 * ll + k_params * np.log(N)
+    bic_results.append((K, BIC))
+    print(f"K={K}, LogLik={ll:.2f}, BIC={BIC:.2f}")
+
+bic_df = pd.DataFrame(bic_results, columns=["K", "BIC"])
+bic_df.plot(x="K", y="BIC", marker='o', title="BIC vs. Number of Classes")
+plt.ylabel("BIC")
+plt.show()
+```
+
+---
+
+## Part 2: Key Drivers Analysis (Satisfaction)
+
+```{python}
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score
+import shap
+import matplotlib.pyplot as plt
+
+# Load data
+drivers_df = pd.read_csv("data_for_drivers_analysis.csv")
+y = drivers_df["satisfaction"]
+X = drivers_df.drop(columns=["satisfaction", "id", "brand"])
+
+# Standardized regression coefficients
+stds = X.std()
+lm_model = LinearRegression().fit(X, y)
+coefs = pd.Series(lm_model.coef_, index=X.columns)
+importance = coefs * stds
+
+# Pearson correlation
+pearson_corr = X.apply(lambda col: col.corr(y))
+
+# Shapley values
+explainer = shap.LinearExplainer(lm_model, X)
+shap_values = explainer.shap_values(X)
+shap_importance = np.abs(shap_values).mean(axis=0)
+
+# Johnson's Relative Weights
+cor_matrix = X.corr().values
+eigenvals, eigenvecs = np.linalg.eig(cor_matrix)
+rel_weights = (eigenvecs ** 2).dot(eigenvals)
+rel_weights = rel_weights / rel_weights.sum()
+
+# Mean Decrease in Gini from Random Forest
+rf = RandomForestRegressor(n_estimators=100, random_state=0)
+rf.fit(X, y)
+gini_importance = rf.feature_importances_
+
+# Compile results
+importance_df = pd.DataFrame({
+    "Pearson Correlation": pearson_corr,
+    "Standardized Coefficients": importance,
+    "Shapley Value": shap_importance,
+    "Johnson Relative Weights": rel_weights,
+    "Mean Decrease Gini (RF)": gini_importance
+}).sort_values(by="Standardized Coefficients", ascending=False)
+
+importance_df
+```
+
+```{python}
+# Plot Key Driver Metrics
+importance_df.plot.barh(figsize=(10, 7), title="Comprehensive Key Drivers of Satisfaction")
+plt.xlabel("Importance")
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## Conclusion
+
+The Latent-Class MNL model effectively segmented consumers into distinct groups based on yogurt preferences. BIC identified optimal segmentation as two latent classes, highlighting clear differences in price and feature sensitivity.
+
+The extended Key Drivers analysis provided comprehensive insights by incorporating multiple metrics (Pearson correlations, standardized regression coefficients, Shapley values, Johnson's relative weights, and random forest importance). This holistic approach delivers robust and nuanced prioritization for strategic decision-making.
+
+---
+
+## References
+
+- Kamakura, W. A., & Russell, G. J. (1989). A Probabilistic Choice Model for Market Segmentation and Elasticity Structure. *Journal of Marketing Research, 26*(4), 379–390.
